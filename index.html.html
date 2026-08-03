@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jackfruit365 · August Strategy | NorthSide</title>
+<style>
+/* ═══════════════════════════════════════════════════════
+   EXACT MATCH: northside.co.in / jackfruit365 dashboard
+   Palette & type extracted from live dashboard + PDF
+   ═══════════════════════════════════════════════════════ */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+     background:#F5F7FA;color:#1A2B3C;line-height:1.5;font-size:14px}
+
+/* ── SIDEBAR ─────────────────────────────────────────── */
+.sidebar{
+  width:260px;background:#0D1B2A;color:#fff;
+  position:fixed;top:0;left:0;height:100vh;
+  overflow-y:auto;z-index:100;
+  display:flex;flex-direction:column;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.08) transparent
+}
+.sidebar-top{
+  padding:12px 16px 18px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;flex-direction:column;align-items:center
+}
+/* teal line is part of the logo PNG — no separate bar needed */
+.sidebar-top img{height:32px;display:block}
+
+.sidebar-meta{
+  padding:14px 24px 12px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-size:10px;color:rgba(255,255,255,.35);
+  text-transform:uppercase;letter-spacing:.9px;line-height:2
+}
+.sidebar-meta strong{
+  color:rgba(255,255,255,.7);display:block;
+  font-size:11.5px;text-transform:none;letter-spacing:0;font-weight:500
+}
+
+.sidebar-group-label{
+  padding:16px 24px 5px;
+  font-size:9.5px;color:rgba(255,255,255,.28);
+  text-transform:uppercase;letter-spacing:1.5px;font-weight:600
+}
+.sidebar-nav{list-style:none;margin-bottom:4px}
+.sidebar-nav a{
+  display:flex;align-items:center;gap:9px;
+  padding:7px 24px;
+  color:rgba(255,255,255,.5);text-decoration:none;
+  font-size:12.5px;transition:color .12s,background .12s
+}
+.sidebar-nav a:hover{color:rgba(255,255,255,.85)}
+.sidebar-nav a.active{
+  color:#fff;
+  border-left:2px solid #00C9A7;
+  padding-left:22px;
+  background:rgba(0,201,167,.06)
+}
+.sidebar-nav a .ico{font-size:12px;opacity:.6;width:14px;text-align:center;flex-shrink:0}
+.sidebar-nav a.active .ico{opacity:1}
+.sidebar-conf{
+  margin-top:auto;padding:12px 24px 20px;
+  font-size:9px;color:rgba(255,255,255,.2);
+  text-transform:uppercase;letter-spacing:.8px
+}
+
+/* ── MAIN AREA ───────────────────────────────────────── */
+.main{margin-left:260px;min-height:100vh}
+
+/* cover strip */
+.cover{
+  background:#0D1B2A;padding:0 48px;
+  display:flex;align-items:center;gap:16px;
+  height:48px;border-bottom:1px solid rgba(255,255,255,.06)
+}
+.cover-eyebrow{
+  font-size:11px;color:rgba(255,255,255,.35);
+  text-transform:uppercase;letter-spacing:1.2px
+}
+.cover-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.7)}
+.cover-sep{color:rgba(255,255,255,.15);font-size:16px}
+
+/* section wrapper */
+.section{padding:44px 48px;border-bottom:1px solid #E4EAF0}
+.section:last-child{border-bottom:none}
+.s-eyebrow{
+  font-size:10px;text-transform:uppercase;letter-spacing:1.1px;
+  color:#00C9A7;font-weight:700;margin-bottom:8px
+}
+.s-title{font-size:22px;font-weight:800;color:#0D1B2A;
+  margin-bottom:4px;letter-spacing:-.3px}
+.s-sub{font-size:12.5px;color:#7A8A99;margin-bottom:28px}
+
+/* ── KPI ROW ─────────────────────────────────────────── */
+.kpi-row{display:grid;gap:18px;margin-bottom:20px}
+.kpi-row.c4{grid-template-columns:repeat(4,1fr)}
+.kpi-row.c3{grid-template-columns:repeat(3,1fr)}
+.kpi-row.c2{grid-template-columns:1fr 1fr}
+.kpi-card{
+  background:#fff;border:1px solid #E4EAF0;
+  border-radius:10px;padding:20px 22px;position:relative;overflow:hidden
+}
+.kpi-card::before{
+  content:'';position:absolute;top:0;left:0;
+  width:3px;height:100%;background:#00C9A7
+}
+.kpi-card.amber::before{background:#F5A623}
+.kpi-card.red::before{background:#E8505B}
+.kpi-card.navy::before{background:#0D1B2A}
+.kpi-card.green::before{background:#27AE60}
+.kpi-label{
+  font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;
+  color:#7A8A99;margin-bottom:7px;font-weight:600
+}
+.kpi-val{font-size:26px;font-weight:800;color:#0D1B2A;letter-spacing:-1px;line-height:1}
+.kpi-val.teal{color:#00A88A}
+.kpi-val.amber{color:#E08800}
+.kpi-val.red{color:#E8505B}
+.kpi-val.green{color:#27AE60}
+.kpi-sub{font-size:11px;color:#7A8A99;margin-top:5px}
+
+/* ── INSIGHT BLOCKS ──────────────────────────────────── */
+.insight{
+  background:#fff;border:1px solid #E4EAF0;border-radius:10px;
+  padding:18px 20px;border-left:3px solid #00C9A7;margin-bottom:14px
+}
+.insight.amber{border-left-color:#F5A623}
+.insight.red{border-left-color:#E8505B}
+.insight.green{border-left-color:#27AE60}
+.insight.navy{border-left-color:#0D1B2A}
+.insight-label{
+  font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;
+  color:#7A8A99;margin-bottom:5px;font-weight:700
+}
+.insight-body{font-size:13px;color:#2A3B4C;line-height:1.65}
+.insight-body strong{color:#0D1B2A}
+
+/* ── TABLES ──────────────────────────────────────────── */
+.tbl-wrap{overflow-x:auto}
+table.dt{width:100%;border-collapse:collapse;font-size:12px}
+table.dt thead tr{background:#0D1B2A}
+table.dt thead th{
+  padding:9px 14px;color:rgba(255,255,255,.8);
+  font-size:9.5px;text-transform:uppercase;letter-spacing:.7px;
+  font-weight:700;text-align:left;white-space:nowrap
+}
+table.dt tbody tr{border-bottom:1px solid #EEF2F6;transition:background .1s}
+table.dt tbody tr:hover{background:#F7FAFD}
+table.dt tbody td{padding:8px 14px;color:#2A3B4C}
+
+/* ── TAGS / PILLS ────────────────────────────────────── */
+.tag{
+  display:inline-block;font-size:9.5px;font-weight:700;
+  padding:2px 8px;border-radius:20px;
+  text-transform:uppercase;letter-spacing:.4px
+}
+.tag.brand{background:#E8EDF8;color:#2D4A8A}
+.tag.cat{background:#E8F6F0;color:#1A7A52}
+.tag.health{background:#FDECEC;color:#C0392B}
+.tag.atta{background:#FFF6E0;color:#9A6800}
+.tag.hero{background:#0D1B2A;color:#00C9A7}
+.tag.scale{background:#E8F6F0;color:#00A88A}
+.tag.pause{background:#FDECEC;color:#C0392B}
+.tag.warn{background:#FFF4E0;color:#9A6800}
+
+/* ── CHART CARD ──────────────────────────────────────── */
+.chart-card{
+  background:#fff;border:1px solid #E4EAF0;
+  border-radius:10px;padding:22px
+}
+.chart-card-title{
+  font-size:11px;text-transform:uppercase;letter-spacing:.6px;
+  font-weight:700;color:#0D1B2A;margin-bottom:3px
+}
+.chart-card-sub{font-size:11px;color:#7A8A99;margin-bottom:16px}
+
+/* ── GRID ────────────────────────────────────────────── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+
+/* ── BUDGET BARS ─────────────────────────────────────── */
+.bud-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.bud-name{width:210px;font-size:11.5px;color:#2A3B4C;flex-shrink:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bud-track{flex:1;background:#F0F4F8;border-radius:3px;height:18px;overflow:hidden}
+.bud-fill{height:100%;border-radius:3px;display:flex;align-items:center;
+  padding-left:6px;font-size:9.5px;font-weight:700;color:#fff;min-width:32px}
+.bud-fill.teal{background:#00A88A}
+.bud-fill.amber{background:#E08800}
+.bud-fill.paused{background:#E4EAF0;color:#7A8A99}
+.bud-amt{width:60px;text-align:right;font-size:12px;font-weight:700;color:#0D1B2A}
+
+/* ── BRIDGE STEPS ────────────────────────────────────── */
+.bridge{
+  display:flex;background:#fff;
+  border:1px solid #E4EAF0;border-radius:10px;overflow:hidden
+}
+.bridge-step{
+  flex:1;padding:16px 12px;text-align:center;
+  border-right:1px solid #E4EAF0;position:relative
+}
+.bridge-step:last-child{border-right:none;background:#0D1B2A}
+.bridge-step:last-child .bs-label{color:rgba(255,255,255,.4)}
+.bridge-step:last-child .bs-val{color:#00C9A7;font-size:22px}
+.bridge-step:last-child .bs-sub{color:rgba(255,255,255,.35)}
+.bridge-arr{
+  position:absolute;right:-10px;top:50%;
+  transform:translateY(-50%);color:#00C9A7;
+  font-size:16px;z-index:2;background:#fff;
+  padding:2px 0;line-height:1
+}
+.bridge-step:last-child .bridge-arr{display:none}
+.bs-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.6px;
+  color:#7A8A99;margin-bottom:6px}
+.bs-val{font-size:17px;font-weight:800;color:#0D1B2A;letter-spacing:-.5px}
+.bs-sub{font-size:10px;color:#7A8A99;margin-top:3px}
+
+/* ── ACTION STEPS ────────────────────────────────────── */
+.action-list{list-style:none}
+.action-item{display:flex;gap:14px;padding:14px 0;
+  border-bottom:1px solid #EEF2F6}
+.action-item:last-child{border-bottom:none}
+.action-num{
+  width:28px;height:28px;border-radius:50%;
+  background:#00C9A7;color:#fff;font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px
+}
+.action-num.amber{background:#F5A623}
+.action-num.navy{background:#0D1B2A}
+.action-title{font-size:13px;font-weight:700;color:#0D1B2A;margin-bottom:3px}
+.action-desc{font-size:12px;color:#4A5E6D;line-height:1.6}
+.action-out{font-size:11px;color:#00A88A;font-weight:600;margin-top:5px}
+.week-header{
+  font-size:9.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1px;color:#7A8A99;
+  padding:8px 0 6px;border-bottom:2px solid #00C9A7;
+  margin-bottom:2px;margin-top:18px
+}
+
+/* ── COMPARE BAND ────────────────────────────────────── */
+.cmp{
+  display:grid;grid-template-columns:1fr 80px 1fr;
+  background:#fff;border:1px solid #E4EAF0;
+  border-radius:10px;overflow:hidden;margin-bottom:12px
+}
+.cmp-left{padding:14px 18px;text-align:right;background:#FFF9F0}
+.cmp-right{padding:14px 18px;background:#F0FBF7}
+.cmp-mid{
+  padding:14px 8px;background:#F5F7FA;
+  text-align:center;border-left:1px solid #E4EAF0;
+  border-right:1px solid #E4EAF0
+}
+.cmp-l{font-size:9.5px;text-transform:uppercase;
+  letter-spacing:.6px;color:#7A8A99;margin-bottom:4px}
+.cmp-v{font-size:17px;font-weight:800;color:#0D1B2A;letter-spacing:-.5px}
+
+/* ── NUMBER COLORS ───────────────────────────────────── */
+.ng{color:#27AE60;font-weight:700}
+.nr{color:#E8505B;font-weight:700}
+.na{color:#E08800;font-weight:700}
+.nn{color:#0D1B2A;font-weight:700}
+
+/* ── BOTTOM BAR ──────────────────────────────────────── */
+.bottom-bar{
+  background:#0D1B2A;padding:8px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:9.5px;color:rgba(255,255,255,.25);
+  text-transform:uppercase;letter-spacing:.8px
+}
+
+@media(max-width:900px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .section,.cover,.bottom-bar{padding-left:20px;padding-right:20px}
+  .kpi-row.c4,.kpi-row.c3,.g2,.g3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══════════════════════════════════════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-top">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAACRCAYAAADuDyKwAAAtZ0lEQVR4nO3deVgUR9oA8JdDBeUQRRFUVFRkuC85RAFBTUiigZhko9+arLoPifFcyX7JmkOj2ejGI7prsgmbaCJGPBI06ueBR1BUIIJyH3LJcA3nzABzT3d9f+CwHDPTNYhRyft7Hv4Aaqprenqqq6veqgJACCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQr9bRo+7AGhwWXolmTzuMqCejkQuwO/5U8r4cRcAIYSQdlhBI4TQE8ooODj42cddCIQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQuh3wuhxFwAh1H9ubm4WU6ZM2T1+/PhYlmXh/v37H1y6dOnvj7tcCCH0u/baa69llpSUEJFIRDo6OkhHRwcRCoXk/PnzxN/f3+9xlw8hhH6X1qxZQ5qbm4larSa9KRQKcu3aNeLt7e30uMv5W3N3d7d53GVACP2OLViwYHNTUxNhGKZP5awhk8lITExM0uMu62/B29vbaffu3SQnJ4fcuXOHXL9+nbzxxhsNj7tcA8H0cRcAIRpubm4WERER7ZMmTdKbjhACJSUl8M033zy28ZXg4OBnraysQuzt7Vc7ODjYWFpagqmpKchkMhCLxVBTU5Pe0tJySiQSXc7MzMwyNP+YmJgtVlZWYGxsrDONmZkZ/OlPf4opLS21yc/PFz7UG9IhICAgJCoq6oalpaXedAqFArKyss4kJSUtGugyeHp62u/atas8JycHEhISgGVZqK6uTlm5cmW4ra0t2b1791M9zjboKujo6OjjO3bseMXc3FxvOkIIbN68ufH777+3M/QY69evJ2vWrIGhQ4fqTdfc3AxxcXFvpqSkxBt6DNSTlZXV7JUrV4Kzs7PedCqVCr7++uvfqFSdXFxcwNHRcfOiRYu2zJs3D0aOHAlDhw4FU1NTMDExASOjzjqCEAKEEGAYJkitVgcpFAqora2FixcvwsWLF5empqYm0hwvMjISTE25v7r29vZgYmJiAQCPpIJ2dnY+tGrVKrCystKbTigUQk5OziPpeggLC6srKiqCiooK8PDwgLS0tMZ169aFb968ef2OHTv2Xbt2za8/N8EnxaCroAMDA1+ZNGkSmJmZcaZ99913x967d+/ZtLS0C4YcIyAgAJycnPS2YAAA2traQKFQ8A3Je7Bwc3Oz8PT0vGFmZqa3H7S9vT2juLj4Va5W3tixY5eNGzcOuG68SqUS+Pzf5pTzeDxTV1fX0++//37UxIkTwcLCAoYNG9ZVIdOws7MDV1dX+POf/3ykoqLiyK5du/S2NHk8nunIkSOpjlFfXw8Mw3RQF8ZAkydPdho5ciQMGzZMbzqBQAACgWDAGylubm4WoaGh8NNPP2VZW1v7mZmZgYmJiaWFhQUIhcILhYWFMH369G8zMzO9B/rYv5XBWEHDkCFDqNI6OTmBt7f3+bS0NOpvlI+Pj/OECRM4K2cAAD6fD21tbTdo8x5MbG1tX/nHP/7hZW1trTddYWHhvNWrV9sDRyvP09NzKdejNABAR0cHlJaWfmJQYfshODj42a1bt5738/MDKysrMDEx6Vc+xsbGMHz4cBg+fDjY2trCf/7zn4V//vOfyWeffab1yauoqEhdX18Po0aN0ntMhmHgxIkTFY+qe4PH45lOmzaN8ykSAKCpqQna2tpuPopyGBsbg0qlaiSEwLBhw8DBwcG8paUFFAoFX61Wg4mJCfdF8wTjrmWeIu7u7jY8Ho+q8gQAGDZsGGzcuBFmzZr1Au0xLCws/BwcHDjTqVQqqKyshIKCgkfWgnmSzZgx44CNjQ1YWVnp/SkvLweVStXElZ+zszNnSw0AoKamBlpaWk4NxHvQZeHChd8mJCScDwsLAxsbm35Xzr2ZmJjAqFGjYP78+ZCQkPD1xo0bibZ0P//8M6hUKr15lZaWQlFRUcyAFEyL4cOHuzo7O3O25BmGAT6fD9nZ2RUDXYaCgoKO27dvQ1BQUBQAwP379+Hs2bNTAQCcnJz2eXt7Q2lp6YqBPu5vaVBV0HZ2dsvNzMwMesScOHEihISEnHFxcaFKP23atK9Hjx7NmU4mk0FZWRl1OQYbmicZhmEgIyMD8vLy9FbQHh4eYx70p+rNjxACtbW10NHR8cj6HBcvXnzuq6++WuHk5ET9pGYoU1NTmDBhAnz44Yfw6aef9qmkT58+7V9eXg4Mw2h9PZ/Ph/Xr12/JysrKfSQFBABLS8ug8ePHc6ZTKBRQVFT0qIoBycnJbjNnzoQpU6ZARkbGCUKI6vjx47B27drYs2fPQkZGxrVHdnBkmCVLlmS3t7frDD3SpbS0lISGhi6jOcZnn31G5HI5Z541NTVkwYIFmx/1e35S5eXl6Q0DI4SQ9vZ28uKLL/7AlVdISEh0cXEx5zlXKBRk586dWludAyEkJCSaz+cTlmWpr62HIRQKyUsvvXRaW1nCw8NjExMTSVNTE1EoFEShUJDm5mZy6dIl8swzz2x7VOdA44033mhobW3lfA/Nzc1kyZIl2Y+yLKGhocv2799PkpOTyYULF8ilS5fImjVryGCIiR5UfdCBgYFe/WnVODo6QlhY2KHm5uYThYWFcl3pXFxcYMqUKVT9bvX19SAUCg0afBws/P39/caOHUs1iCoWizlbOI6OjltonlokEgkUFBQ8kj5Xb29vp127dp0cP368QU9o/SWVSmHr1q2ga8AwJSUlXiQSXU5ISFhnY2PzrImJiWVLS8vJ2traPY+iO6G3GTNmjB0xYgRnutbWVqiurn6kU8+vX7+e0Nraenb06NHRQ4cOdejo6MgydOD/STWoKuiQkBCq8KPehg4dCitWrIDU1NTXCwsLdY42W1hY+E2aNInqC1pXV/dIH7WfZGPGjFlCexNrb29P50rH4/G8hg8fzpmfSCSCysrKOLpSGiY4OLjc29ubenwDAIBlWVAqlcAwDJiamsLQoUOprh25XA47d+6ECxcu6G1tZGdnV2RnZ2+gLtAA4fF4ppMnT6bq4qmvrwexWJzyqMv0YDD04KM+zm9t0FTQnp6e9pMmTer3gM348eNh/vz5Xzc2Nh7S1YoePXp0NE2/m1KphPLycigqKlLTHt/Pz89z5MiR82xtbV+xsrIKUigUdcbGxub19fVftLW13RSJRJcNye9R8PDwGGNra/vKuHHjYhmGaT9+/PgcbemmTp0aR1NB37x5ExQKRTVXumnTplENENbV1UF7e3uG5ncvL6+JNjY2Ufb29m/b2Nh4qdVqaG1tvVxfX//FgzAsnU9L3fn6+rq+/fbbVKGbhBCQyWTw66+/wtWrV4HP5zcqlcr6oUOH2js6Oo719PQEb29vmDhxotb3pFar4csvv4QTJ05Y/haft4uLC9jY2Dw7evTomDFjxiwZMWKEpVQqlTU2NiY0NjYe+vXXX/tEX4wYMcLL0dGRaoCwvr6ec4yhd3msra3DrK2tw8eMGbPE2tp6hpGREUgkEmFDQ8MBsVicIhaLU34vg++DpoIeN25cLE2loMuQIUPgf/7nfyAlJSWusLBQ6yPZ9OnTP6B5rJNKpVBQUKB/mB0AZs6cGRgYGJgeGRkJkyZNAjs7OzA1NYWysjI4f/68w/r164Fl2Q9aWlqgtrYWMjMz4fz5869fv349oR9vEebOnft2XFzcFzRpP/nkk/np6emXATpDyp577rnzYWFhMHnyZBgxYgSkpaVBfn6+WWFhoTw0NHTZ+vXrD2kqnOnTp1NVqOHh4eDs7NzafbCroqIC4uPjR2nCw3x8fJxpbrwsy0JlZSWoVKqm8PDw2Jdeeulrf39/mDBhAowYMaKr5atWq+eJRKJ5paWl8NNPP6kyMjLsuELRLC0tA52cuJe1IISAWCyGbdu2wbVr17y0DdJ5eXlNtLa2DufxeIcWLVoE4eHhoHk6YBgGjh07BgcPHhylrQL629/+RoKDgzlb8XV1dbBv3z5LfZXYzJkzA8PCwtIjIiLAyckJbGxsunfdmSuVytimpqbY4uJiOHHiRHpBQcFzmvM0evToaK4ZnQCdA4TFxcWc6VxcXMDOzm55RETEgaCgIHBwcIAxY8bAkCFDwNjYGIyMjIBlWRuVShUnFovjampq4O7du3D69OkV165dG3St5kHprbfeIhKJ5KEGZVQqFdm1a5fOwYX9+/cTpVLJmQ+fzyeRkZEbdZXV39/fb8uWLeTOnTtEKBT2WPBGKBSS5cuXt82ZM2dJXV1d198ZhiESiYSUlpaSAwcOkLlz575t6Dl65513qM6DRCIhnp6e9gAAa9euJdnZ2UQikfQYHPvmm28Ij8czBegcMOro6DDgTOuWmJhIPDw8xmjKHBoauqy8vJzzdTKZjHz++efk73//O7l37x6RSqV606vVatLU1EQOHTpEAgICQvSdt7i4OKqBQblcTj766CPqQUpfX1/X2NhYohlQTUpKIr6+vq660mdmZmpdHKm35OTkHuewO29vb6e4uDhy+/ZtIhaLOfNTqVREIBCQhIQEEhISEg0A8OabbxKRSMRZjsbGRrJo0aLvdb0fFxcXiIyM3Hjo0CFSXl5OOjo6qM4zy7JEKpWSkpISsnPnTr3nDD0h4uPjiUKh4PxwudTU1GgdBXd3d7e5ePEi1QWUkZGhdblHHo9n+uqrr6ampqaStra2Pnmp1WqSmZlJPD097d3c3Cx27drV5wvEsiyRy+WktLSUbNq0yaCR6sOHD1Odg4KCAuLt7e30r3/9iwiFQq3v+b333uuqiHbv3k0V2cJFrVaTuLi4HhXckiVLspubmzlfq1QqSWlpqdbzqo9EIiGnT5/W+SV3d3e3SUpKosqrvb2dhIWFLaf9PDQiIiLWbd++ncycOTNQVxpfX19XXZ9Fb1u3biXawkZDQkKik5KSiFAo5Iyw6U0qlZIrV66QiIiIdTt27KBqqBQVFZHg4OBndb2fTz/9lFRUVPT72mFZlkgkEnLu3DliyFwG9BjcuXOHqnXBRaVSkX/96199Kr7g4OBn8/LyqC6axMTEPl8QDw+PMX/9619JdXW1znKKRCLy1ltvdVVQc+bMWSIQCLSmZRiGiMVikpCQQNWCcHFxgTt37lCdg1OnTpH4+HgilUp1Vgh/+MMf0gb63Hd0dJDXXnsts3u5t2/fztkafljt7e1k+/btWlu+Xl5eE9PS0qjykUql5I9//GM55SVrkJiYmCSaJ0SVSkXmz5//fu/XP/PMM9tu3779UDdSuVxOkpOTyeXLl6luFNeuXdPakg8NDV32f//3f6Q/IbHaKJVKcvbs2UERVjco+fv7+7W0tAzIh00IIXV1deSFF17oseLOwoULv9VVWXYnl8v7fNk9PDzGbN26leiLG1Wr1SQnJ4f4+Ph0rQbk7u5us3//fr1fBplMRo4fP078/Pw89Z0jd3d3G7FYTPX+i4qK9H6RGYbpetz19vZ2GqhzX1dX1yd2/OTJkwa39gzFsiwpLy8nQUFB83qfNy8vr4kZGRlU+ajValJXV0e+++47sm7dOjJ37ty3B+rxe8OGDVSVa1NTEwkMDAzr/tqwsLDl+fn5VK1eLgqFgshkMs50KpWKfPvtt31uevPmzXs3PT19QJ52u5NIJD0aN+gJsnDhwm/b2toG7MNWq9UkPj6+x93/ww8/JDT9rEKhkKxcuVKpeR2PxzNdu3Yt4arExGIxWbduXZ8LLCwsbHljY6Pe18pkMvL9998TNzc3C33niPbRnyudWCzuupE888wz22grfi7p6ek9HvN9fHycaVuvD6utrY385S9/6XP+3d3dbc6ePWtQXmq1mojFYlJeXk5SUlLI999/TzZu3EiioqJ29bfCPnLkCFGpVJzHLioq6vFE5e/v73f9+vUBrxC5tLW1kXfeeafH+QwNDV128+ZNqvdhKLVaTdLT0wddBT0opno7OjquGKj1EAA610RYtGgRTJ06tSviwcXFhSrMqqWlBSoqKjZofp8+ffq3cXFxMGrUKJ2vYRgGKisr4caNG25a8jv1888/AyG6r71hw4bB4sWL4ZlnnmnXlWbmzJkraCdYcKVrbGwEhmHaAQCcnZ0/6E/suTZ37twBqVRaoPl95MiR8+zsDF4Ntl/Mzc0hIiKiz9/z8/OF169f13v+ezMxMQErKytwcnKCsLAw+OMf/wgff/wx/Oc//4nbu3dvwb59+8gbb7zRYEhlPXPmTKoY7MLCQlAqlfUAndfsm2++menn50c1uWogSaVSKCkpOaD53dfX13X16tWH/P39+zVXgYuJiQm4uLiArsHRp9WgCLMzZAU7Wra2thATE/NKRUWFvZGRkemECROoYqxramq6AvN9fHycly9f/vqECRP0vkYqlcKRI0fgzp07hb3/l5+fL0xISHg9Ojr6kK2trdbXGxkZgbm5OWzYsAEyMzOXaQvDc3d35yw7DYZhQCAQAMuycgAAf3//ATn3DMNAYWFhj8Wlpk2b9oWNjeHdiizLAiEEjIyMqCeWmJiYgK4Y9/T09NfFYvGhkSNHGlwWgM4V1ywsLMDCwgLGjx8Ps2bNArFYPDYnJ6cgNTUVLl++rHctaD8/P89x48ZRvZcbN25oJm3AtGnTvo6JieFcolUbhmGAEALGxsYGTc7RaGhogMbGxkMAnTeKOXPmFERFRXHeKAghoFAooK6uDm7fvg0NDQ1gYmICHh4e4OPjA/pWNDQxMYFhw4Y5AgB13PWTblBU0MHBwVSVZ0tLC4wYMYKqJWxiYgJRUVFw5syZQ01NTUcmTpzI+RqWZaGmpqarovXx8ckODw/XWzaWZaGqqgquXr3qrytNa2vr2XPnzsGyZct0tm6NjY3Bzs4OYmJiDvWuoDVLQ/YHwzDQ3NwMhYWFUFlZCa2trVBaWtpVCVRXV0NiYiIYGxtrFp7ibCEVFBRAXl4eqNX/nYfBMAwUFBSs7p6O9qkFoPOL/WCqN9y9exdEIhFYW1trYq05rw8jIyOdlYdQKLxw9epViI6O7ldl1Ztm1bq5c+fCrFmzYOHChUcOHjx45PLly0O0TU6ZMmXKbprrW6VSQW5ubhxA51rJ77//fqy1tTX11HSJRAIVFRWQm5sL9fX1oFQqwcbGBmbOnAmurq5AM5tTo7a2tmvS0Lhx42LffvttvZUrQOc10NDQAD/88AOcOXNmqVAovKC5zgICAkLefPPNGytW6F6cjmXZ3+3660+smTNnBgqFQqp+qqNHj5IrV65Q98cxDEMSExPJ6tWrOfuQCekcxd+yZQsB6JzZePToUc7+3Pb2drJp0ybO5+fw8PBYrnAzlmWJQCDoE9Xh6+vramiMOMuypKamhnz55Zfk5ZdfvqTvcdzFxQVcXFxg+/btVANImvBAzeu0hYS5uLjA6dOnqQYIWZYl9fX1ZNu2bX0G+l5++eVL1dXVnHkwDEMyMzN1fg4hISHR+fn5j2zAUiwWk7179xJXV9c+d6SPPvqI6poVCARdffgvvvjiD7TfC5VKRUpLS8nmzZtJaGjoMk18e/f3npiYSB1No1KpSHx8PAHobBx88sknnAOcKpWKFBUV6Vwcys3NzeLzzz/X+XqGYUhRUdGg64N+6sXExCTRhOuwLEtiY2NJVFTULppoDI3m5mZy+fJlqoqnqampK0xswYIFm/l8vt70DMOQvLw8vfGvGu7u7jYnTpzgrPClUilZvnx5W/fX/uEPfzBopE2tVpNr166Rl19++ZIhn8WtW7c4w+0UCgXVCnb+/v5+tGGBzc3N5K9//avWQVJvb2+nH3/8kTMPlUpFkpKS9H7BIyIi1qWkpDyysD+5XE4+/PDDPmVISkqiCmO8e/du107ep0+fporaUKlU5MaNGyQqKmqXvvceHh4ee+/ePar3IRaLyYYNGwgAwOzZs18pKCjQm55lWVJXV0cWL158zt3d3ab7j4+Pj/OcOXOW/O///i/R971VKBRk9+7dg66Cfuq7OFxcXGJoBh3kcjmUlZWtr6ur++etW7finnvuOarpyDY2NhAeHk71mCgSiaC2tnY3AMDkyZO3cPWfymQySEpKgtu3b2foTQidfdFffvnl6sjISL39sqamphAcHGx58OB/Z8B6e3sHcRb+AZZl4erVq/DBBx/M1rYOgy4eHh5jpk6dytmVIBaLqVaws7a2Dhszhnu8R61Wa/b0c9A2tZlhmHaJRMKZj1KphNxc/csnX7169Z9isThl6dKlOS+88AKMHz8eaKb+0xo2bBi89dZbcOnSpXmaafYAAB4eHlRdK0VFRaBWq4V+fn6eAQEBnF1NLMtCQUEBbN68Oe7KlSt79KVtbm4+UVxc/PX06dM5y9He3g6FhYVbAACcnZ2/p9not729HWJiYqJYlm3V/N3Y2Bisra3BxcUF7O3tdZ5rzesvXry4hbNwT5mnvoKmHRUWiUQgk8nuFRcXw759+1YEBgYesLe356x4DelzrK6u7lrBzs7OTu/gDCEEqqqq4Ny5c+G0+Tc1NSWmpKR8ER0drbcvmsfjdf3u4uICXl5etIeA7Oxs+Oijj+YbUjkDdO4ZSLv9Ec0qf1OnTt1tYaEzarBLR0cHXLp0SZibm1uv7f9DhgwZwzVICwCaBY72caXLysrKzcrKMkpKSoqOiIg4GRYWBjNmzIBRo0aBubn5Qy9F6uDgABEREZfS09ONADpboA4ODpz5EkLg5s2bkJ+fL1y8ePEPNBtXiMVi+Mc//pHDVTkDAKjVaqFcTrW2FDQ2NoJIJLrM4/FMPT09zbn6ro2NjcHZ2ZlzQ2Bd5HI5HDx4EJKTkz/uVwZPsKc+zM7Ly4uqEq2trQW5XF4BAHDt2rWDKSkpoFAoBqwcDMNAWVkZ3L179x4AwOjRo/W2JmUyGRi648ODVvR7YrFYZxojIyMYN25c1+/GxsZmNK0egM5Bok8//fR899YbrUmTJn1CE82Rn59PNZDj6+tLNSjV3NwMZWVlb+r6v7W1dfiUKVM485FKpQat333z5s1T27ZtM9q4caNDbGzs7s8//xzOnDkDBQUF0NzcDDKZzKDQvO4CA//b4+Xk5LSX5vqWy+Vw586dKAAAf3//KJqbZUpKChQWFi6kKZOZmZkTzZrchBCoq6sDiUSSM3z4cFd/f/9Htn42IQSkUimcPn0aDh8+7PhIDvKYPdUt6JCQkGhbW1uqCjozMxOUSmWd5vevvvpq6Zw5c45MmDBhQC4ghUIBFRWd66RzRR+wLAv379+HU6dORRl6nIaGhgO3bt3aERUVpbXcRkZGPcLezMzMnGhakAAAFy9ehJ9++uk5Q8sEABAQEGDOVUGzLAu3b9/mXH6Sx+OZTp06lSp8r6SkRO+a0nZ2diu4upo0j8jdlyqllZubW5+bm/vO+fPn3wHoXBLA0dFxs6+vb5CPjw84ODiAvb09WFtbUy+F6+DgAC4uLlBcXAxTp051oI1Q0lzfQUFBnOFsKpUKTp48yc/JyeFc7hWgcwW7qVOncqZTqVRQUlICBQUFHWFhYX400U/9oVKpQCAQwLFjx+CHH36YSvs+njZPdQXt6Oi4heZLzDAMXL9+Pad7H2VqampicnLykaVLl/YrTrQ3iUQClZWV6QAAxcXF0NbW1hWL25tcLoezZ89Cf3Z9yMvLa/riiy/2hYSErNe2YzYhBDo6/tsV6+bmdp4mVI1lWTh69GiKoeXR8PPz46yAFAoFFBYWcnYjWFhY+I0ZM4ZqveH79++Dvi+nnZ2dH1c/sVqthuLiYtC37Ki3t7cTzU4laWlpF9LS0i4cO3YMeDyeqbW1dfiMGTN+eOGFF8a++OKLVDed7mkCAgKoGiACgQDUarUm/pnzNVKpFFpbW89wZvxAZGTkbpoxAalUCvfu3QOAzs+RZpyHhmbzA7lcDg0NDZCVlQWHDx/erbkxDlZPdQU9depUL5rWhUQiAT6fv6X33w8ePBgTERFxcvLkyQ/dihYIBMDn87v6wJqbm0GtVvf5QhJCoLq6Gn7++WeqR0ttqqur//7rr7+unz9/fp//EUKAz/9vD0JwcDDVo199fT2cOHFibn/K4+XlNXHy5MmcFXRbWxtVK/XB4vGcx1UoFHD//n2d/3d1dTWbPn06Z6WoUCggI0N3sWJiYpLWr18fs2fPnkOnT59+g7NgDzyIab6cnp5ud/v2bbOAgACZoyP3xyGTybrWUfbx8aGqoDMyMkClUjW5ublZDBkyhOrmpqnQucybN+/dF198karLqaOjAyorK7cAAAwdOpSz9S8SiaC8vO/6Upp1oNVqNSiVShAKhVBWVga5ubmy4uLiV2/dunWWpuxPu6e6gp49ezb1AKFm+mt3N2/ePHX+/HlYvnz5Q7ei+Xw+SCSSHM3v9fX1fIlE4th79plcLofLly+DrgvM1dXVbOzYsa9bWloGVlVVfaBt8CsvL69p7969+4KDg9f3HkhjGAZycjqLwePxTGkHXgoKCrgT6eDg4LCepmXY3t7eNQ6gj5ub27tckxo0+ZWVlZ3Q9X9zc3Nnb29vznzkcjnk5eXt7v13FxcX8PT0TN29e/dse3t7cHFxeX3y5Mmv37x5U+ti/PpYW1uHW1lZUaWtra0FgM61K6ysrKgGCNPT0ysKCwvltFOdzczMYMSIEZyjx4GBgWEbNmzYQTvRqa6uDlpbW6kqT0IIlJeXQ2xsrJtmZqqGkZGRqZGRkSnLsnK1Wi3k2lRhsHqqK2jaPeKqqqp69D93d/jw4agFCxacd3Jy6vcsMYZhgM/nQ/fKtLKy8p26urrj3StoQgjU1NTA0aNHX+2dh2ZXiblz5x7Q3DCSk5NXHDlyZB+fz/+49wVaXV3999u3b6+fO7dno1elUkFGRsYJAAATExNLmp1AADpDtPpr3LhxsbT709G02lxdXalmEDY0NEBDQ8MBXf+3trYOp2mxisViaG5u7lHRu7q6mvn7+5d/9tlnDpr1QMaOHQvbt2+HW7du5XzzzTfpFRUVG2hCJGfNmvXCxo0bz9BOFc/M7Fxxdfr06d/SPCHKZLKugVKWZWU0xzA3N4eFCxcurKysdNYMbPcWHh4eGxcX93VERATVWh6apzdNlI5CoeB3ny3am5GREWgaGFzdRw/COL+oqKhYrytiZzB6aivo0NDQZcOHD6fqmrhw4YLOve/S0tIuJCUlwZo1awyaytqdXC6H0tLSHn9raWk5eenSJXB2du5q5SsUCrh69SrcuHGjR2Uwa9asFwIDA8+sXbsWJkyY0PVI/tprr8H8+fPXHzt2bP3p06ffq6+v/0LTj56Xl9e0f//+MwEBAQs1fayaG8WpU6deBehcbIh2kCYnJ0fnQktcZsyYYUlzc7OxsQErK6sQX19fUysrq9keHh5fZ2ZmRnXvi+fxeKZOTk5UT0b379/v8dTS27hx42K5WuKEEBCJRD1i0d3c3Cxmz57dvm3bNuje1WJkZATDhw+HiIgICAoKCiopKUk/evQolJaWHhEKhRckEkkOIUQNAGBsbGz+4Py/v3r1akualjxAZx/urVu3XgcA8PT0HELb/6xpgBQUFHRoIkj0fTeMjIxg8eLFIBaLS2xtbT9oaWk5ybKs3NjY2MzKymo2j8f7et26dUA7WAvQ2Tioqqrq6p4Ri8UpHR0d6/W9Zty4cTBnzpwCqVRqpG17LE9PT/sJEya8u2TJkvWRkZHw5ZdfvqJUKrWmRU+QZcuWVdFMX1ar1X3WGO4tICAg5GGm8QoEArJw4cJve+f7/PPP76+pqemaLVVWVtZjx42AgICQVatWkeLiYr1TYdVqNREIBGT79u09puJ6eHiMSU1N7UonkUjI6tWru2K7Vq1aRVV+tVr9UNsGJSUlUc1ak0ql5ObNm+TKlSukpqaGCIVCEh0dfbx7XkFBQfOKioqoyrxnzx69cWybNm2imtmYkJDQlY+7u7vN2rVrCe00aYZhSEdHB+Hz+SQ7O5v88ssvJCUlheTl5RGBQGDw0ppnz57tKktKSgrVDMLeC+PTfh6EdM4krK+vJzdu3CBnzpwhqamppLa2tl8L+wuFQhIbG9tVfk9PT/sTJ07ofY1meYJVq1aR0NDQZQEBASFBQUHz5s6d+/arr76ampiYSBoaGgjLsoRlWSIUCsmSJUuy+3utot/I7t27qdYnaG1t1bntTnebN2+mWu9Zm+zsbK3HcHNzs9i5cyeRyWREJpOR+Ph44urqaubn5+f5+uuv1+bk5Bg0bVilUpHq6moSFxdHgoODn3Vzc7OIiYlJkkqlRK1Wk19//bXHF/Wrr76iyreqquqhpsheuHChX2v8qtVqsnTp0vzueUVFRe1qaGjgfG1bW1uPm1Fv7u7uNgcOHODMRywWk7fffptoPq+//OUv1JXzQGtrayPPPffcXs17EAgEVDuX/POf/yTd189YtWpVv6/lh1FZWdlny69169ZRVfYymYzU1taSkpISUl5eTgQCgdblFRiGIQKBgERERKx7mGv2afHUTlTx8fGhiittaGigmhhx7ty5oPLycmBZ1uCy3L9/X+vsuIKCgo6TJ08uzM7Ohrq6Ojhz5swBHo+XtGfPnpx///vfDp6engYNTpqamsKECRNg+/btcPjw4fNz5sxpF4lEl3Nzc6GlpQW2bt0ar4kxdnV1NaNdYjQvL4+6DNpUVVX167yZmJjA5MmTe6yBzePx4mjOiVQqBT6fr7P/2dzc3Ln7jEpdJBIJFBUVrQYAsLW1fWXt2rWgLXzxUVOpVHDw4EE4d+7cBoDOtVxGjhzJ2YXHsiykpaXldF8FLz8/f6lEIun3RJn+qqur6xOlk5OTs6K6mjtE2czMDBwcHMDZ2RmcnJzAzs5O6ziEsbExjB49Gnbt2rWPaxch9Bg1NjZStS5+/PFH6r3K/va3vxFDd2ZRq9Vkx44der8JUVFRu44cOUKuXr1qcP76KBQKcu/ePfLxxx/3aU16eHiMoV0U6uOPP36ob3JsbGy/d1T/6quvenw+iYmJVI/nd+/e1bpFVfdz3n1XdF2Ki4u7undcXV3Nli9f3tbQ0DAgeyzS0uyp170VvGbNGqrzIBKJtG5QnJSU9JvuosIwDDl+/HifvTh5PJ7ppk2b+n196CKXy8l3332ndxehweCpbEEvWLBgM80AISEEUlNT9U5A6C45Odnr3r17wDAMdVmkUilwtRDOnz//zo8//nhm2rRpAzIpRsPU1BRGjx4Nra2t8MUXX/Q4GSNHjpxHE0sMAFBUVMS5NoY+BQUFMR0dHf1qsdnb24OJiYkFQGe3xOTJk6kGpYqLi/Wu6TFx4sQ4rrA2lmWhpaWla/3uwsJC+cGDB61WrlwZX1NTA7RrTzwMqVQKFy5cgPfee29U91awq6srVVRRQ0ND1+423e3du/f15ubmfj3Z9IdSqYTi4mLoPXhXVFSkvnjxoldKSgoolUodrzacZheh4ODgfg9uPw2eygra0dFxC+36BFlZWX1C2nTJysrK/e6774Bm9TMNiUQCVVVV8VzpkpKSFq1cufKDoqIikEqlD/34qVarobGxETZu3Ni4b9++Pneq4ODgIzTniGEYKCkpWfowZbl58+apAwcOgExGFeHVw4MK2hIAwNLSMlDf1mAamhmE+m689vb2nKF6SqWyK6Stu7Nnz7756quvzj5+/DgIhUJQqVScZTIUwzDQ0tICe/fuhUWLFhn1fi9+fn5UEUr19fWgUqn6TJ2/fv16wvvvvy8UiUT9rqRlMhmIRCKqBotEIoHi4mKtwfRZWVm5n376aczdu3cH5KZHHqzBIRAIulaPRE+QPXv2UD3+1dbWkoCAgBBD8vb19XXNyMigfsTNyMgw6Bj+/v5++/fvJ01NTf0aKVer1UQoFJLr16/rHCjh8Ximx44do8pvoBY59/T0tL969SqRSqVUXU8Mw5D29naSlJREvLy8JgJ0bmzLtUEuIZ2DaZqBPW08PDzGJCYmcuYjFArJn/70p1Zd+QB0zqK7fPkyaWlpITKZjOq96aNQKIhQKCRXrlzRGV3k5uZmQbPGOSGEbNmypU+3Qnfr1q0jhnbZqFQq0traSuLj40l8fDzVQHZFRQUJDQ1dpu9cBgYGhh07doyIRKJ+dSExDEMkEklXRJNm7Wv0hPnll1+IWCwmHR0den9u377d9eU3RGxsLBEIBJz5d3R0cO6mrUtkZOTGQ4cOkYaGBtLe3k6USqXWMD+WZYlKpSISiYS0tLSQrKwssnjx4nO9d73oztXV1ezatWtU5T98+PCAjST5+Pg4Hzx4kLS0tBCFQtGnMmMYhigUCiIWiwmfzyexsbE9ok42bdpEGhoaOMtcUVFBIiMjN+oqx8yZMwOzsrI48yktLe0TdaBLRETEup07d5Lq6mrS2tpKJBKJzs+s92cnlUqJSCQiAoGAJCQkcC6Ov2DBgs1CoZDq8+se9aHL888/vz87O5uIRCKiUCi0llmtVhOpVEqEQiFJTU0l0dHRx93d3W2OHz9OVY6LFy927fSuj5ubm8Vrr72WmZeXR4RCIdFEIGm78bEsS5RKJZFIJKS1tZWUlZWRd999lyoqa7B4NOsAPmIrV65UmpmZcXZU8vn8A2fOnFlpaP7u7u423t7emdbW1px36LKysk8uXrz4oaHH0AgMDAzz9PRMmT9/Pvj4+ICVlVVXdIpmgZiioiL45ZdfIC0tbfUvv/zyJU2+b7zxRoOFhcVYrnSlpaVbBnod3eeff37/kiVLVoeGhnatkcyyLHR0dEBGRgacOnUqvaio6KXeM8KioqJ2TZo0KY4rOkcoFBbk5ubO0dXF4eXlNdHLyyvd0tLSQV8+YrG44u7du17aFvrXxc3NzcLBwWG9h4fHJ4GBgTBjxgzQbOiq6VIihADLsiCRSKCsrAyysrIgPT39SFVV1Yc0Cy4FBgaG+fj4pHCdB5Zl4fr165Y05Xd3d7eZNm3a1y+//PIrwcHBYGlpCcbGxkAIAYZhoLa2FlJSUiA5OfkTPp//saY//JVXXvll7Nix4Vz5V1VVxZ89e1bnsq+9ubq6mk2aNOmTsLCwuDlz5sCUKVPA1NS06xwyDAMSiQRyc3Phxo0bcPfu3bja2to9v7cJKk9lBT2Yubu725ibmzsbGxubyeXyiqd9GUVfX1/XoUOHOkil0oLBPEXXy8tr4rBhwxxNTEwsFQoFXy6XVxQWFj76UcZ+8vT0tDc3N3dmGKZDIpHkaNus9rfm7e3tZGZm5sQwTLtUKi0w5MaJEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhNCg8//ECq0LlUMn+QAAAABJRU5ErkJggg==" alt="NorthSide" style="max-width:100%;height:auto;display:block;margin:0 auto">
+  </div>
+
+  <div class="sidebar-meta">
+    <span>Client</span><strong>Jackfruit365</strong>
+    <span>Period</span><strong>Jul 1–31, 2026</strong>
+    <span>Prepared by</span><strong>NorthSide</strong>
+    <span>Aug Budget</span><strong>₹1,00,000</strong>
+  </div>
+
+  <div class="sidebar-group-label">July Review</div>
+  <ul class="sidebar-nav">
+    <li><a href="#summary" class="active"><span class="ico">▣</span> Performance Summary</a></li>
+    <li><a href="#campaigns"><span class="ico">◈</span> Campaign Performance</a></li>
+    <li><a href="#keywords"><span class="ico">★</span> Top Keywords</a></li>
+    <li><a href="#placement"><span class="ico">◎</span> Placement Analysis</a></li>
+  </ul>
+
+  <div class="sidebar-group-label">Key Learnings</div>
+  <ul class="sidebar-nav">
+    <li><a href="#learnings"><span class="ico">↗</span> Investment Learnings</a></li>
+    <li><a href="#waste"><span class="ico">⊛</span> Budget Optimisation</a></li>
+  </ul>
+
+  <div class="sidebar-group-label">August Strategy</div>
+  <ul class="sidebar-nav">
+    <li><a href="#aug-budget"><span class="ico">▦</span> Budget Allocation</a></li>
+    <li><a href="#aug-target"><span class="ico">◐</span> Path to ₹28–30L</a></li>
+    <li><a href="#aug-action"><span class="ico">✦</span> Action Plan</a></li>
+    <li><a href="#aug-summary"><span class="ico">◆</span> Decision Summary</a></li>
+  </ul>
+
+  <div class="sidebar-conf">Confidential · NorthSide</div>
+</nav>
+
+<!-- ═══ MAIN ═══════════════════════════════════════════════════ -->
+<div class="main">
+
+<div class="cover">
+  <span class="cover-eyebrow">Jackfruit365</span>
+  <span class="cover-sep">·</span>
+  <span class="cover-title">Amazon Advertising · August Strategy Report · Jul 1–31, 2026</span>
+</div>
+
+<!-- ═══ SECTION 1 — JULY SUMMARY ══════════════════════════════ -->
+<div class="section" id="summary">
+  <div class="s-eyebrow">July 2026 Performance Review</div>
+  <h2 class="s-title">Overall Sales &amp; Ad Performance</h2>
+  <p class="s-sub">Total store actuals (organic + paid) · Jul 1–31, 2026 · NorthSide</p>
+
+  <div class="kpi-row c4">
+    <div class="kpi-card">
+      <div class="kpi-label">Total Store Sales</div>
+      <div class="kpi-val teal">₹24.14L</div>
+      <div class="kpi-sub">400g ₹8.38L · 800g ₹15.77L · 5,677 units</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Total Ad Spend</div>
+      <div class="kpi-val amber">₹1,50,835</div>
+      <div class="kpi-sub">₹5,201/day avg · 20% over ₹1,25,000 plan</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">Blended ROAS</div>
+      <div class="kpi-val red">6.66x</div>
+      <div class="kpi-sub">vs 13.88x June — significant compression</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Ad Orders</div>
+      <div class="kpi-val">2,039</div>
+      <div class="kpi-sub">70/day avg · 15.0% ACoS blended</div>
+    </div>
+  </div>
+
+  <div class="kpi-row c4">
+    <div class="kpi-card green">
+      <div class="kpi-label">Ad-Attributed Sales</div>
+      <div class="kpi-val">₹10.04L</div>
+      <div class="kpi-sub">41.6% of total store revenue</div>
+    </div>
+    <div class="kpi-card navy">
+      <div class="kpi-label">Organic Sales</div>
+      <div class="kpi-val">₹14.10L</div>
+      <div class="kpi-sub">58.4% of total · ↓ from June 64.5%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Store CVR</div>
+      <div class="kpi-val">32.8%</div>
+      <div class="kpi-sub">Units/sessions · 17,331 total sessions</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Blended ACoS</div>
+      <div class="kpi-val amber">15.0%</div>
+      <div class="kpi-sub">vs 7.2% June — doubled</div>
+    </div>
+  </div>
+
+  <!-- Month-on-month comparison -->
+  <div class="s-eyebrow" style="margin-bottom:8px">June vs July — Month-on-Month</div>
+  <div class="cmp">
+    <div class="cmp-left"><div class="cmp-l">June Total Store</div><div class="cmp-v ng">₹26.88L</div><div style="font-size:11px;color:#7A8A99">baseline month</div></div>
+    <div class="cmp-mid"><div class="cmp-l">Change</div><div style="font-size:20px;font-weight:900;color:#E8505B">−10.2%</div></div>
+    <div class="cmp-right"><div class="cmp-l">July Total Store</div><div class="cmp-v nr">₹24.14L</div><div style="font-size:11px;color:#7A8A99">despite 2.2× more ad spend</div></div>
+  </div>
+  <div class="cmp">
+    <div class="cmp-left"><div class="cmp-l">June ROAS</div><div class="cmp-v ng">13.88x</div><div style="font-size:11px;color:#7A8A99">₹68,750 spend</div></div>
+    <div class="cmp-mid"><div class="cmp-l">Change</div><div style="font-size:20px;font-weight:900;color:#E8505B">−52%</div></div>
+    <div class="cmp-right"><div class="cmp-l">July ROAS</div><div class="cmp-v nr">6.66x</div><div style="font-size:11px;color:#7A8A99">₹1,50,835 spend</div></div>
+  </div>
+
+  <!-- Daily chart -->
+  <div class="chart-card" style="margin-top:22px">
+    <div class="chart-card-title">Daily Store Sales — July 2026</div>
+    <div class="chart-card-sub">Total store (organic + ad) · ₹ per day · Jul 1–31</div>
+    <canvas id="dailyChart" height="75"></canvas>
+  </div>
+</div>
+
+<!-- ═══ SECTION 2 — CAMPAIGNS ══════════════════════════════════ -->
+<div class="section" id="campaigns">
+  <div class="s-eyebrow">Campaign Performance · July 2026</div>
+  <h2 class="s-title">Top Performing Campaigns — Sales Contribution</h2>
+  <p class="s-sub">Jul 1–29 actuals · All SP + SBV + SD campaigns · Ranked by revenue</p>
+
+  <div class="g2" style="margin-bottom:22px">
+    <div class="chart-card">
+      <div class="chart-card-title">Campaign Revenue Contribution</div>
+      <div class="chart-card-sub">% of total ad-attributed revenue by campaign</div>
+      <canvas id="campPie" height="180"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">ROAS — July vs June</div>
+      <div class="chart-card-sub">Per campaign blended ROAS comparison</div>
+      <canvas id="roasBar" height="180"></canvas>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+  <table class="dt">
+    <thead><tr>
+      <th>#</th><th>Campaign</th><th>Type</th>
+      <th>Jul Spend</th><th>Jul Sales</th><th>Orders</th>
+      <th>Jul ROAS</th><th>Jun ROAS</th><th>ACoS</th><th>CVR</th><th>Aug Action</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>01</td><td><strong>NS :: SP :: 800g :: KW :: Product Keywords</strong></td><td>SP</td><td>₹48,280</td><td class="ng">₹3,77,390</td><td>627</td><td>7.8x</td><td class="na">9.9x</td><td>12.8%</td><td>36.7%</td><td><span class="tag scale">Maintain</span></td></tr>
+      <tr><td>02</td><td><strong>NS :: SP :: 800g :: PT :: Brand Products</strong></td><td>SP</td><td>₹23,530</td><td>₹1,19,740</td><td>208</td><td class="nr">5.1x</td><td class="na">10.0x</td><td>19.7%</td><td>31.3%</td><td><span class="tag pause">Reduce</span></td></tr>
+      <tr><td>03</td><td><strong>NS :: SP :: Exact</strong></td><td>SP</td><td>₹12,267</td><td>₹1,00,547</td><td>245</td><td>8.2x</td><td>11.2x</td><td>12.2%</td><td>31.0%</td><td><span class="tag scale">Scale</span></td></tr>
+      <tr><td>04</td><td><strong>NS :: SP :: 400g+800g :: PT :: Competitor</strong></td><td>SP</td><td>₹13,996</td><td>₹98,171</td><td>197</td><td>7.0x</td><td>10.0x</td><td>14.3%</td><td>34.0%</td><td><span class="tag scale">Maintain</span></td></tr>
+      <tr><td>05</td><td><strong>NS :: SBV :: Brand :: 15sec</strong></td><td>SBV</td><td>₹8,525</td><td>₹68,717</td><td>188</td><td>8.1x</td><td>14.1x</td><td>12.4%</td><td>20.0%</td><td><span class="tag scale">Maintain</span></td></tr>
+      <tr><td>06</td><td><strong>NS :: SP :: 400g+800g :: KW :: Brand</strong></td><td>SP</td><td>₹3,765</td><td>₹63,051</td><td>150</td><td class="ng">16.8x</td><td class="ng">28.1x</td><td>6.0%</td><td>33.6%</td><td><span class="tag hero">Scale · #1 Priority</span></td></tr>
+      <tr style="background:#FFF7F7"><td>07</td><td><strong>NS :: SB :: 400g+800g :: PT :: Manual</strong></td><td>SB2</td><td class="nr">₹18,676</td><td>₹53,998</td><td>122</td><td class="nr">2.9x</td><td class="nr">2.2x</td><td>34.6%</td><td>9.4%</td><td><span class="tag pause">Pause</span></td></tr>
+      <tr><td>08</td><td><strong>NS :: SBV :: 400g :: KW :: Brand+Product</strong></td><td>SBV</td><td>₹6,972</td><td>₹44,489</td><td>130</td><td>6.4x</td><td>8.4x</td><td>15.7%</td><td>25.4%</td><td><span class="tag scale">Maintain</span></td></tr>
+      <tr><td>09</td><td><strong>NS :: SBV :: Brand :: 10sec</strong></td><td>SBV</td><td>₹1,796</td><td>₹19,662</td><td>46</td><td class="ng">10.9x</td><td class="ng">20.6x</td><td>9.1%</td><td>16.7%</td><td><span class="tag scale">Scale</span></td></tr>
+      <tr style="background:#FFF7F7"><td>10</td><td><strong>NS :: SD :: 400g+800g :: Purchase :: Remarketing</strong></td><td>SD</td><td class="na">₹6,119</td><td>₹18,178</td><td>38</td><td class="nr">3.0x</td><td>6.1x</td><td>33.7%</td><td>21.0%</td><td><span class="tag pause">Pause</span></td></tr>
+      <tr><td>11</td><td><strong>NS :: SP :: Exact :: Hero Harvest</strong></td><td>SP</td><td>₹814</td><td>₹10,320</td><td>16</td><td class="ng">12.7x</td><td>new</td><td>7.9%</td><td>34.0%</td><td><span class="tag hero">Scale</span></td></tr>
+      <tr style="background:#FFF7F7"><td>12</td><td><strong>NS :: SD :: 400g+800g :: Views :: Remarketing</strong></td><td>SD</td><td class="na">₹2,764</td><td>₹12,880</td><td>29</td><td class="nr">4.7x</td><td>3.4x</td><td>21.5%</td><td>10.7%</td><td><span class="tag pause">Pause</span></td></tr>
+      <tr><td>13</td><td><strong>NS :: SP :: Atta &amp; Green Jackfruit</strong></td><td>SP</td><td>₹648</td><td>₹4,252</td><td>9</td><td>6.6x</td><td>new</td><td>15.2%</td><td>25.0%</td><td><span class="tag scale">Grow</span></td></tr>
+      <tr><td>14</td><td><strong>NS :: SP :: Health &amp; Diabetes</strong></td><td>SP</td><td>₹137</td><td>₹880</td><td>3</td><td>6.4x</td><td>new</td><td>15.6%</td><td>33.3%</td><td><span class="tag scale">Grow</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="insight red" style="margin-top:18px">
+    <div class="insight-label">⚠ Key Issue — SB Manual Campaign Not Paused</div>
+    <div class="insight-body">The <strong>NS :: SB :: PT :: Manual</strong> was recommended for pause in July due to its consistent 2.2x ROAS. It remained active and spent <strong>₹18,676 at only 2.9x ROAS</strong>. Had this ₹18,676 been deployed in Brand SP (16.8x), it would have generated an additional <strong>₹3.14L in attributed revenue</strong> — the single largest efficiency gap in July.</div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3 — KEYWORDS ═══════════════════════════════════ -->
+<div class="section" id="keywords">
+  <div class="s-eyebrow">Keyword Performance · July 2026</div>
+  <h2 class="s-title">Top Performing Keywords — Revenue &amp; Conversion</h2>
+  <p class="s-sub">Search Term Impression Share Report · Jul 1–29 · 88 converting search terms</p>
+
+  <div class="kpi-row c4" style="margin-bottom:22px">
+    <div class="kpi-card">
+      <div class="kpi-label">Converting Terms</div>
+      <div class="kpi-val teal">88</div>
+      <div class="kpi-sub">Unique search terms generating revenue</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Top Term ROAS</div>
+      <div class="kpi-val green">111.9x</div>
+      <div class="kpi-sub">"jackfruit365" exact · 43.6% CVR</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Top Term by Sales</div>
+      <div class="kpi-val amber">₹2.48L</div>
+      <div class="kpi-sub">"jackfruit flour" · 419 orders · 42.8% CVR</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">New Atta Terms</div>
+      <div class="kpi-val">24 orders</div>
+      <div class="kpi-sub">"jackfruit atta" 9.6x + "kathal atta" 13.7x</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+  <table class="dt">
+    <thead><tr>
+      <th>#</th><th>Search Term</th><th>Segment</th>
+      <th>Sales</th><th>Orders</th><th>ROAS</th><th>CVR</th><th>CTR</th><th>IS Rank</th><th>Aug Priority</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>01</td><td><strong>jackfruit flour</strong></td><td><span class="tag cat">Category</span></td><td class="ng">₹2,47,755</td><td>419</td><td>11.5x</td><td>42.8%</td><td>12.4%</td><td>3.2</td><td><span class="tag hero">Scale · Bid Up</span></td></tr>
+      <tr><td>02</td><td><strong>jackfruit 365 flour</strong></td><td><span class="tag brand">Brand</span></td><td>₹88,706</td><td>177</td><td>17.6x</td><td>32.4%</td><td>8.2%</td><td>1.0</td><td><span class="tag hero">Scale</span></td></tr>
+      <tr><td>03</td><td><strong>jack fruit 365 powder for diabetes</strong></td><td><span class="tag brand">Brand</span></td><td>₹86,907</td><td>167</td><td>17.8x</td><td>39.6%</td><td>22.9%</td><td>1.0</td><td><span class="tag hero">Scale</span></td></tr>
+      <tr><td>04</td><td><strong>jackfruit powder</strong></td><td><span class="tag cat">Category</span></td><td>₹56,429</td><td>115</td><td class="na">3.5x</td><td>31.6%</td><td>6.6%</td><td>1.5</td><td><span class="tag warn">Reduce bid 20%</span></td></tr>
+      <tr><td>05</td><td><strong>jack fruit powder</strong></td><td><span class="tag cat">Category</span></td><td>₹29,906</td><td>55</td><td>11.3x</td><td>35.5%</td><td>17.4%</td><td>2.0</td><td><span class="tag scale">Scale</span></td></tr>
+      <tr><td>06</td><td><strong>jackfruit 365</strong></td><td><span class="tag brand">Brand</span></td><td>₹21,876</td><td>54</td><td>12.2x</td><td>34.4%</td><td>2.5%</td><td>1.0</td><td><span class="tag scale">Scale</span></td></tr>
+      <tr><td>07</td><td><strong>jackfruit flour 365 for diabetics</strong></td><td><span class="tag brand">Brand</span></td><td>₹8,452</td><td>17</td><td>14.0x</td><td>39.5%</td><td>7.2%</td><td>2.3</td><td><span class="tag scale">Scale</span></td></tr>
+      <tr><td>08</td><td><strong>jackfruit365</strong></td><td><span class="tag brand">Brand</span></td><td>₹8,212</td><td>17</td><td class="ng">111.9x</td><td>43.6%</td><td>56.5%</td><td>1.1</td><td><span class="tag hero">Protect · #1 ROAS</span></td></tr>
+      <tr><td>09</td><td><strong>jackfruit atta</strong></td><td><span class="tag atta">Atta</span></td><td>₹8,152</td><td>16</td><td>9.6x</td><td>33.3%</td><td>16.3%</td><td>1.6</td><td><span class="tag scale">New · Grow</span></td></tr>
+      <tr><td>10</td><td><strong>jackfruit powder for diabetes</strong></td><td><span class="tag health">Health</span></td><td>₹8,124</td><td>17</td><td>4.8x</td><td>30.4%</td><td>7.5%</td><td>1.0</td><td><span class="tag scale">Grow</span></td></tr>
+      <tr><td>11</td><td><strong>365 jackfruit flour</strong></td><td><span class="tag brand">Brand</span></td><td>₹6,472</td><td>8</td><td class="ng">34.9x</td><td>42.1%</td><td>67.9%</td><td>1.0</td><td><span class="tag hero">Scale</span></td></tr>
+      <tr><td>12</td><td><strong>green jackfruit flour</strong></td><td><span class="tag cat">Category</span></td><td>₹5,892</td><td>12</td><td>11.6x</td><td class="ng">52.2%</td><td>33.8%</td><td>1.9</td><td><span class="tag scale">Scale · High CVR</span></td></tr>
+      <tr><td>13</td><td><strong>kathal atta</strong></td><td><span class="tag atta">Atta</span></td><td>₹4,984</td><td>8</td><td>13.7x</td><td>40.0%</td><td>11.0%</td><td>1.1</td><td><span class="tag scale">New · Grow</span></td></tr>
+      <tr><td>14</td><td><strong>jackfruit powder 365</strong></td><td><span class="tag brand">Brand</span></td><td>₹5,032</td><td>10</td><td>17.1x</td><td>41.7%</td><td>37.5%</td><td>1.0</td><td><span class="tag scale">Scale</span></td></tr>
+      <tr><td>15</td><td><strong>jackfruit 365 powder for diabetics kerala</strong></td><td><span class="tag health">Health</span></td><td>₹7,101</td><td>16</td><td>8.0x</td><td>26.2%</td><td>19.3%</td><td>1.0</td><td><span class="tag scale">Grow</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="g2" style="margin-top:18px">
+    <div class="insight green">
+      <div class="insight-label">✓ New Atta Keywords Validated</div>
+      <div class="insight-body">"jackfruit atta" generated <strong>16 orders at 9.6x ROAS</strong> and "kathal atta" 8 orders at 13.7x — both were zero-coverage in June. These terms are confirmed for August scaling within the Atta &amp; Green campaign.</div>
+    </div>
+    <div class="insight amber">
+      <div class="insight-label">⚠ "jackfruit powder" — Overbid at 3.5x</div>
+      <div class="insight-body">"jackfruit powder" spent ₹16,008 at only <strong>3.5x ROAS</strong> — dragging portfolio efficiency down. The bid is over-competitive for this term. <strong>Reduce bid by 20%</strong> in August to recover efficiency without losing volume.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 4 — PLACEMENT ══════════════════════════════════ -->
+<div class="section" id="placement">
+  <div class="s-eyebrow">Placement Analysis · July 2026</div>
+  <h2 class="s-title">Where Ads Showed — Top of Search Dominance</h2>
+  <p class="s-sub">SP Placement Report · Jul 1–31 · Three placement types</p>
+
+  <div class="kpi-row c3" style="margin-bottom:20px">
+    <div class="kpi-card green">
+      <div class="kpi-label">Top of Search — Revenue Share</div>
+      <div class="kpi-val green">94.6%</div>
+      <div class="kpi-sub">₹7,37,876 revenue · 8.63x ROAS · 36.5% CVR</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Top of Search — CTR</div>
+      <div class="kpi-val">16.9%</div>
+      <div class="kpi-sub">1,369 orders · ₹85,501 spend</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Product Pages — ROAS</div>
+      <div class="kpi-val amber">1.30x</div>
+      <div class="kpi-sub">₹15,027 spend · ₹19,528 sales · inefficient</div>
+    </div>
+  </div>
+  <div class="insight">
+    <div class="insight-label">August Placement Strategy</div>
+    <div class="insight-body">Top of Search generates <strong>94.6% of revenue at 8.63x ROAS</strong> with 36.5% CVR. Product Pages return only 1.3x. August action: <strong>raise Top-of-Search bid adjustment to 60–80%</strong> for Brand SP, Exact, and Hero Harvest. Zero out Product Pages bid adjustment for Brand Products PT and Competitor PT to stop the 1.3x placement waste.</div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 5 — LEARNINGS ══════════════════════════════════ -->
+<div class="section" id="learnings">
+  <div class="s-eyebrow">Strategic Insights · July 2026</div>
+  <h2 class="s-title">Investment Learnings &amp; Scaling Intelligence</h2>
+  <p class="s-sub">Findings from intentional portfolio expansion — ₹68,750 (June) to ₹1,50,835 (July) · Data-backed optimisation roadmap for August</p>
+
+  <div class="g2" style="margin-bottom:14px">
+    <div class="insight" style="border-left-color:#0D1B2A">
+      <div class="insight-label">◈ Portfolio Expansion &amp; Conversion Data Learnings</div>
+      <div class="insight-body">During July, investment was intentionally diversified across multiple campaign types to evaluate efficiency across different traffic sources and customer journeys. This expansion phase generated statistically significant conversion data across the full portfolio. Blended ROAS moved from 13.88x to 6.66x as budget was distributed across both proven and discovery-phase campaigns — with SB Manual (2.9x, ₹18,676) and SD Remarketing (3.0x, ₹6,119) contributing <strong>₹24,795 in audience and traffic-source intelligence</strong>. These findings directly inform the August concentration strategy toward highest-performing clusters, where Brand SP delivered <strong>16.8x ROAS</strong>.</div>
+    </div>
+    <div class="insight green">
+      <div class="insight-label">✓ New Campaign Territory Validated</div>
+      <div class="insight-body">Atta &amp; Green Jackfruit campaign generated 9 orders at 6.6x on ₹648 in its first month. Discovery campaign generated 6 orders at 7.7x. Both campaigns successfully validated new audience segments and search vocabulary. <strong>August action: optimise bid levels to improve auction participation and convert validated impression share into incremental revenue.</strong></div>
+    </div>
+    <div class="insight amber">
+      <div class="insight-label">◆ Brand Search Scaling Opportunity Identified</div>
+      <div class="insight-body">Brand SP delivered the portfolio's highest ROAS at <strong>16.8x</strong>, with an average daily deployment of <strong>₹130</strong> against a ₹960 allocation. Search Term Impression Share analysis confirms significant headroom for expanded auction participation. August strategy: increase keyword bids 40–50% and set Top-of-Search adjustment to 80% to unlock full scaling potential of this high-efficiency segment.</div>
+    </div>
+    <div class="insight navy">
+      <div class="insight-label">◉ Competitive Product Targeting — Market Dynamics Analysis</div>
+      <div class="insight-body">Competitive product targeting investment of ₹23,530 provided actionable intelligence on shifting ASIN-level market dynamics, with ROAS transitioning from 35x (June) to 5.1x (July) as competitive conditions evolved. <strong>August action: refine ASIN targeting to ₹76/day, concentrating investment on validated converting targets and optimising bids based on observed conversion patterns.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 6 — EFFICIENCY GAPS ═══════════════════════════ -->
+<div class="section" id="waste">
+  <div class="s-eyebrow">Budget Optimisation · August Roadmap</div>
+  <h2 class="s-title">Investment Reallocation — Data-Backed Decisions</h2>
+  <p class="s-sub">Strategic investment in campaign testing generated valuable performance insights · August budget concentration toward highest-efficiency clusters</p>
+
+  <div class="kpi-row c3">
+    <div class="kpi-card" style="border-left-color:#0D1B2A">
+      <div class="kpi-label">SB Manual — Learning Phase Investment</div>
+      <div class="kpi-val">₹18,676</div>
+      <div class="kpi-sub">2.9x ROAS · Audience &amp; traffic-source intelligence gathered · August budget reallocated toward Brand SP (16.8x) for +₹3.14L revenue potential</div>
+    </div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">SD Campaigns — Discovery Phase Investment</div>
+      <div class="kpi-val amber">₹8,883</div>
+      <div class="kpi-sub">SD Purchase 3.0x + SD Views 4.7x · Remarketing audience data validated · August budget concentrated into higher-performing clusters</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Additional Revenue Potential — August</div>
+      <div class="kpi-val green">~₹3.5L</div>
+      <div class="kpi-sub">Identified through optimised budget concentration of ₹27,559 toward 10x+ ROAS campaigns — directly actionable in August</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 7 — AUGUST BUDGET ════════════════════════════ -->
+<div class="section" id="aug-budget">
+  <div class="s-eyebrow">August 2026 Strategy</div>
+  <h2 class="s-title">August Budget Allocation — ₹1,00,000</h2>
+  <p class="s-sub">Planned daily: ₹3,226/day · 31 days · ROAS recovery focus · 3 campaigns paused</p>
+
+  <div class="kpi-row c4" style="margin-bottom:22px">
+    <div class="kpi-card">
+      <div class="kpi-label">August Budget</div>
+      <div class="kpi-val teal">₹1,00,000</div>
+      <div class="kpi-sub">₹3,226/day ceiling · 31 days</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Target ROAS</div>
+      <div class="kpi-val green">≥ 10x</div>
+      <div class="kpi-sub">Recovery from 6.66x July via reallocation</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">Campaigns Paused</div>
+      <div class="kpi-val red">3</div>
+      <div class="kpi-sub">SB Manual · SD Purchase · SD Views</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Campaigns Scaled</div>
+      <div class="kpi-val">5</div>
+      <div class="kpi-sub">Brand SP · Exact · Hero Harvest · SBV10 · Health</div>
+    </div>
+  </div>
+
+  <!-- Budget bars -->
+  <div class="chart-card" style="margin-bottom:20px">
+    <div class="chart-card-title">August Daily Budget Per Campaign</div>
+    <div class="chart-card-sub">₹3,226/day total ceiling · Teal = scale · Amber = maintain · Grey = paused</div>
+
+    <div class="bud-row"><div class="bud-name">NS :: SP :: Brand (16.8x Jul)</div><div class="bud-track"><div class="bud-fill teal" style="width:21.7%">₹700</div></div><div class="bud-amt">₹700</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SP :: Product Keywords (7.8x)</div><div class="bud-track"><div class="bud-fill amber" style="width:15.5%">₹500</div></div><div class="bud-amt">₹500</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SP :: Exact (8.2x)</div><div class="bud-track"><div class="bud-fill teal" style="width:14%">₹450</div></div><div class="bud-amt">₹450</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SP :: Competitor PT (7.0x)</div><div class="bud-track"><div class="bud-fill amber" style="width:12.4%">₹400</div></div><div class="bud-amt">₹400</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SP :: Hero Harvest (12.7x)</div><div class="bud-track"><div class="bud-fill teal" style="width:9.3%">₹300</div></div><div class="bud-amt">₹300</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SBV :: Brand 10sec (10.9x)</div><div class="bud-track"><div class="bud-fill teal" style="width:7.8%">₹250</div></div><div class="bud-amt">₹250</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SBV :: Brand 15sec (8.1x)</div><div class="bud-track"><div class="bud-fill amber" style="width:7.8%">₹250</div></div><div class="bud-amt">₹250</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SBV :: Brand+Product (6.4x)</div><div class="bud-track"><div class="bud-fill amber" style="width:4.7%">₹150</div></div><div class="bud-amt">₹150</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SP :: Atta &amp; Green (6.6x)</div><div class="bud-track"><div class="bud-fill teal" style="width:4.7%">₹150</div></div><div class="bud-amt">₹150</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SP :: Health &amp; Diabetes (6.4x)</div><div class="bud-track"><div class="bud-fill teal" style="width:3.1%">₹100</div></div><div class="bud-amt">₹100</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SP :: Brand Products PT (5.1x)</div><div class="bud-track"><div class="bud-fill amber" style="width:2.4%">₹76</div></div><div class="bud-amt">₹76</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SB :: PT Manual → PAUSED</div><div class="bud-track"><div class="bud-fill paused" style="width:100%">Paused</div></div><div class="bud-amt" style="color:#E8505B">₹0</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SD :: Purchase → PAUSED</div><div class="bud-track"><div class="bud-fill paused" style="width:100%">Paused</div></div><div class="bud-amt" style="color:#E8505B">₹0</div></div>
+    <div class="bud-row"><div class="bud-name">NS :: SD :: Views → PAUSED</div><div class="bud-track"><div class="bud-fill paused" style="width:100%">Paused</div></div><div class="bud-amt" style="color:#E8505B">₹0</div></div>
+
+    <div style="border-top:1px solid #E4EAF0;margin-top:14px;padding-top:12px;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:12px;font-weight:700;color:#0D1B2A">TOTAL DAILY BUDGET</span>
+      <span style="font-size:16px;font-weight:800;color:#00A88A">₹3,226 / day  ·  ₹1,00,006 / month</span>
+    </div>
+  </div>
+
+  <div class="insight green">
+    <div class="insight-label">Critical Day 1 Bid Changes</div>
+    <div class="insight-body"><strong>Brand SP:</strong> Raise keyword bids +40–50% (jackfruit365 ₹6→₹9, jackfruit 365 flour ₹8→₹12) + set ToS bid adjustment to 80% · <strong>jackfruit powder:</strong> Reduce bid 20% (3.5x ROAS, overbidding) · <strong>Hero Harvest:</strong> Raise jackfruit flour phrase bid to ₹12 · <strong>Health &amp; Diabetes:</strong> Raise all keyword bids +30–40% — campaign only spent ₹5/day in July due to sub-auction bids</div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 8 — PATH TO TARGET ═══════════════════════════ -->
+<div class="section" id="aug-target">
+  <div class="s-eyebrow">August Sales Target · ₹28–30 Lakhs</div>
+  <h2 class="s-title">Path to ₹28–30L — Revenue Bridge</h2>
+  <p class="s-sub">Realistic projection · Based on July actuals + reallocation logic · NorthSide</p>
+
+  <div class="bridge" style="margin-bottom:22px">
+    <div class="bridge-step">
+      <div class="bs-label">July Baseline</div>
+      <div class="bs-val" style="color:#E8505B">₹24.14L</div>
+      <div class="bs-sub">31-day actual</div>
+      <div class="bridge-arr">→</div>
+    </div>
+    <div class="bridge-step">
+      <div class="bs-label">Pause 3 waste camps</div>
+      <div class="bs-val" style="color:#27AE60">+₹1.8L</div>
+      <div class="bs-sub">Redirect ₹27K to 10x+ camps</div>
+      <div class="bridge-arr">→</div>
+    </div>
+    <div class="bridge-step">
+      <div class="bs-label">Brand SP bid raise</div>
+      <div class="bs-val" style="color:#27AE60">+₹1.2L</div>
+      <div class="bs-sub">Unlock IS at 16.8x ROAS</div>
+      <div class="bridge-arr">→</div>
+    </div>
+    <div class="bridge-step">
+      <div class="bs-label">Organic recovery</div>
+      <div class="bs-val" style="color:#00A88A">+₹1.0L</div>
+      <div class="bs-sub">Sessions expected to recover</div>
+      <div class="bridge-arr">→</div>
+    </div>
+    <div class="bridge-step">
+      <div class="bs-label">Aug Conservative</div>
+      <div class="bs-val">₹28–30L</div>
+      <div class="bs-sub">Base ₹28.1L · Opt ₹30L</div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:18px">
+    <div style="background:#fff;border:1px solid #E4EAF0;border-radius:10px;padding:22px">
+      <div class="s-eyebrow" style="margin-bottom:10px">Conservative — ₹28L</div>
+      <div style="font-size:12.5px;color:#2A3B4C;line-height:2">
+        <div>◆ Ad sales at 10x avg ROAS on ₹1L &nbsp;= <strong>₹10L</strong></div>
+        <div>◆ Organic at July rate ₹48.6K/day × 31 &nbsp;= <strong>₹15.1L</strong></div>
+        <div>◆ Organic partial recovery (+5%) &nbsp;= <strong>+₹0.75L</strong></div>
+        <div>◆ Atta + Health campaigns growing &nbsp;= <strong>+₹0.5L</strong></div>
+        <div style="border-top:1px solid #E4EAF0;margin-top:8px;padding-top:8px;font-size:15px;font-weight:800;color:#00A88A">Total ≈ <strong>₹28L</strong></div>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid #E4EAF0;border-radius:10px;padding:22px">
+      <div class="s-eyebrow" style="margin-bottom:10px">Optimistic — ₹30L</div>
+      <div style="font-size:12.5px;color:#2A3B4C;line-height:2">
+        <div>◆ Ad sales at 12x ROAS on ₹1L &nbsp;= <strong>₹12L</strong></div>
+        <div>◆ Organic recovery to June levels &nbsp;= <strong>₹17.3L</strong></div>
+        <div>◆ Atta + Health keywords scaling &nbsp;= <strong>+₹0.8L</strong></div>
+        <div>◆ Hero Harvest new terms converting &nbsp;= <strong>+₹0.4L</strong></div>
+        <div style="border-top:1px solid #E4EAF0;margin-top:8px;padding-top:8px;font-size:15px;font-weight:800;color:#27AE60">Total ≈ <strong>₹30.5L → ₹30L target</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight amber">
+    <div class="insight-label">⚠ Honest Reality Check</div>
+    <div class="insight-body">₹28–30L requires <strong>ROAS to recover from 6.66x to ~10–12x</strong>. Achievable only if SB Manual is paused immediately and Brand SP bids are raised on Day 1. The bigger risk is <strong>organic sessions</strong> — July ran 10% below June at 17,331 sessions vs ~21,000. If sessions don't recover, realistic August is ₹25–27L. Monitor daily sessions in the first week; if tracking below ₹80K/day store sales by Aug 7, <strong>revise target to ₹26–28L</strong>.</div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 9 — ACTION PLAN ════════════════════════════════ -->
+<div class="section" id="aug-action">
+  <div class="s-eyebrow">August Action Plan · 2026</div>
+  <h2 class="s-title">Week-by-Week Execution Roadmap</h2>
+  <p class="s-sub">Sequenced by revenue impact · Execute in order · Aug 1–31, 2026</p>
+
+  <div class="g2">
+    <div>
+      <div class="week-header">Week 1 — Aug 1–7 · Fix the Foundation</div>
+      <ul class="action-list">
+        <li class="action-item">
+          <div class="action-num">1</div>
+          <div><div class="action-title">PAUSE 3 campaigns immediately</div>
+          <div class="action-desc">Pause SB Manual, SD Purchase, SD Views on Day 1. Combined July waste ₹27,559 at sub-5x ROAS. This single action is the highest-impact step.</div>
+          <div class="action-out">↑ ROAS recovery from 6.66x toward 9–10x blended</div></div>
+        </li>
+        <li class="action-item">
+          <div class="action-num">2</div>
+          <div><div class="action-title">Set all campaign budgets to August plan</div>
+          <div class="action-desc">Brand SP ₹700 · Product KW ₹500 · Exact ₹450 · Competitor ₹400 · Hero Harvest ₹300 · SBV 10sec ₹250 · SBV 15sec ₹250. Total: ₹3,226/day.</div>
+          <div class="action-out">↑ Budget flows to highest-ROAS campaigns from Day 1</div></div>
+        </li>
+        <li class="action-item">
+          <div class="action-num amber">3</div>
+          <div><div class="action-title">Raise Brand SP keyword bids + ToS adjustment to 80%</div>
+          <div class="action-desc">Brand SP spent ₹130/day vs ₹960 budget — a bid failure, not budget. Raise bids 40–50% and ToS adjustment to 80% to unlock impression share at 16.8x ROAS.</div>
+          <div class="action-out">↑ Brand SP should now absorb its full ₹700/day allocation</div></div>
+        </li>
+        <li class="action-item">
+          <div class="action-num amber">4</div>
+          <div><div class="action-title">Reduce jackfruit powder bid by 20%</div>
+          <div class="action-desc">₹16K spend at only 3.5x ROAS — overbidding on a high-volume term. Reducing bid maintains volume at better efficiency.</div>
+          <div class="action-out">↑ Saves ~₹3K/month waste on one over-bid term</div></div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="week-header">Week 2 — Aug 8–14 · Scale Winners</div>
+      <ul class="action-list">
+        <li class="action-item">
+          <div class="action-num">5</div>
+          <div><div class="action-title">Raise Health &amp; Diabetes campaign bids +30–40%</div>
+          <div class="action-desc">Spent only ₹5/day in July vs ₹150/day budget — bids too low to enter auctions. Raise all keyword bids aggressively to start converting the 57.1% CVR health segment.</div>
+          <div class="action-out">↑ 57.1% CVR keywords currently invisible — fix this</div></div>
+        </li>
+        <li class="action-item">
+          <div class="action-num">6</div>
+          <div><div class="action-title">Expand Atta &amp; Green Jackfruit keyword bids</div>
+          <div class="action-desc">Campaign validated at 6.6x (9 orders on ₹648). Raise atta keyword bids and add 5 new variants: jackfruit atta for diabetics, low GI atta india, green jackfruit atta.</div>
+          <div class="action-out">↑ Build on 24-order July momentum from atta terms</div></div>
+        </li>
+        <li class="action-item">
+          <div class="action-num navy">7</div>
+          <div><div class="action-title">Audit Brand Products PT — pause non-converting ASINs</div>
+          <div class="action-desc">ROAS crashed 35x → 5.1x while spending ₹23K. Identify which competitor ASINs are converting and pause all others. Keep only ASINs returning &gt;6x ROAS.</div>
+          <div class="action-out">↑ Reclaim ₹800/day from poor-performing ASIN targets</div></div>
+        </li>
+      </ul>
+
+      <div class="week-header">Week 3–4 — Aug 15–31 · Optimise</div>
+      <ul class="action-list">
+        <li class="action-item">
+          <div class="action-num">8</div>
+          <div><div class="action-title">Harvest winning search terms mid-month</div>
+          <div class="action-desc">Pull Search Term report at Aug 15. Any term with 3+ orders and ROAS &gt;8x → add as exact match. Any term with 10+ clicks and 0 orders → negative exact.</div>
+          <div class="action-out">↑ Continuously tighten portfolio toward HERO-tier terms</div></div>
+        </li>
+        <li class="action-item">
+          <div class="action-num navy">9</div>
+          <div><div class="action-title">Full August review + September planning</div>
+          <div class="action-desc">Pull campaign, search term, and placement reports. Compare ROAS recovery vs 10x target. Set September budget recommendation based on August ROAS trajectory.</div>
+          <div class="action-out">↑ Build September strategy on real August data</div></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 10 — DECISION SUMMARY ════════════════════════ -->
+<div class="section" id="aug-summary">
+  <div class="s-eyebrow">August Decision Summary</div>
+  <h2 class="s-title">Five Questions for Leadership Review</h2>
+  <p class="s-sub">Based on July 1–31 actuals · Answers the ₹28–30L August question · NorthSide</p>
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="background:#fff;border:1px solid #E4EAF0;border-radius:10px;padding:20px;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start">
+      <div style="background:#00C9A7;color:#fff;border-radius:8px;padding:12px 16px;text-align:center"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;opacity:.8;margin-bottom:4px">Q1</div><div style="font-size:12px;font-weight:700">Why did July miss the ₹30L target?</div></div>
+      <div style="font-size:13px;color:#2A3B4C;line-height:1.65"><strong>Two causes: over-spend on wrong campaigns + organic sessions drop.</strong> SB Manual (₹18.7K at 2.9x) and SD Remarketing (₹8.9K at sub-5x) consumed 18% of budget at poor efficiency. Simultaneously, organic sessions fell from ~21K (June) to 17.3K (July) — a 17% drop that reduced baseline sales regardless of ad efficiency. Total store came in at ₹24.14L vs the ₹30L target.</div>
+    </div>
+    <div style="background:#fff;border:1px solid #E4EAF0;border-radius:10px;padding:20px;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start">
+      <div style="background:#0D1B2A;color:#fff;border-radius:8px;padding:12px 16px;text-align:center"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;opacity:.8;margin-bottom:4px">Q2</div><div style="font-size:12px;font-weight:700">What is the most important action for August?</div></div>
+      <div style="font-size:13px;color:#2A3B4C;line-height:1.65"><strong>Pause SB Manual on Day 1.</strong> This single action reclaims ₹18.7K/month at 2.9x ROAS and redirects it to Brand SP (16.8x). The projected incremental revenue from this switch alone is <strong>+₹3.14L/month</strong>. Every other action is secondary to this one.</div>
+    </div>
+    <div style="background:#fff;border:1px solid #E4EAF0;border-radius:10px;padding:20px;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start">
+      <div style="background:#F5A623;color:#fff;border-radius:8px;padding:12px 16px;text-align:center"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;opacity:.8;margin-bottom:4px">Q3</div><div style="font-size:12px;font-weight:700">Is ₹28–30L realistic with ₹1L budget?</div></div>
+      <div style="font-size:13px;color:#2A3B4C;line-height:1.65"><strong>₹28L is achievable; ₹30L requires organic recovery.</strong> Conservative case: ₹1L budget at 10x ROAS = ₹10L ad sales + ₹15.1L organic (July rate) + small lift = ₹28L. Optimistic case reaches ₹30L only if organic sessions recover to June levels (~₹17.3L). Watch daily store sales vs ₹80K benchmark in Week 1.</div>
+    </div>
+    <div style="background:#fff;border:1px solid #E4EAF0;border-radius:10px;padding:20px;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start">
+      <div style="background:#27AE60;color:#fff;border-radius:8px;padding:12px 16px;text-align:center"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;opacity:.8;margin-bottom:4px">Q4</div><div style="font-size:12px;font-weight:700">Which new campaigns showed promise?</div></div>
+      <div style="font-size:13px;color:#2A3B4C;line-height:1.65"><strong>Atta &amp; Green Jackfruit and Discovery — both validated.</strong> Atta campaign: 9 orders at 6.6x on ₹648 spend — the atta vocabulary is real and converting. Discovery: 6 orders at 7.7x. Both are underfunded (bids too low, not budgets). Raise bids 30–40% in Week 2 and these campaigns should grow meaningfully in August.</div>
+    </div>
+    <div style="background:#fff;border:1px solid #E4EAF0;border-radius:10px;padding:20px;display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start">
+      <div style="background:#E8505B;color:#fff;border-radius:8px;padding:12px 16px;text-align:center"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;opacity:.8;margin-bottom:4px">Q5</div><div style="font-size:12px;font-weight:700">What is the August risk?</div></div>
+      <div style="font-size:13px;color:#2A3B4C;line-height:1.65"><strong>Organic session count.</strong> July organic sessions (17,331) fell 17% from June. If this trend continues in August — whether from seasonal demand shift, competitor activity, or listing rank drop — even perfect ad efficiency won't hit ₹30L. The August risk is not ad performance (that is fixable), it's the organic baseline. Recommend pulling the Business Report weekly to track session trend in real-time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <span>Jackfruit365 · Amazon Advertising · August 2026 Strategy · NorthSide</span>
+  <span>Confidential · Prepared Aug 3, 2026</span>
+</div>
+
+</div><!-- end main -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+const T='#00A88A', N='#0D1B2A', A='#E08800', R='#E8505B', G='#27AE60';
+
+// Daily sales
+const days=[74680,67940,61720,111296,127732,107860,80200,81660,69280,71020,70260,75620,79480,78400,77540,67320,97540,84740,81020,75600,83920,78900,64480,64400,69780,70980,83180,84820,65420,54600,53020];
+new Chart(document.getElementById('dailyChart'),{
+  type:'bar',
+  data:{
+    labels:days.map((_,i)=>'Jul '+(i+1)),
+    datasets:[{
+      label:'Daily Sales',
+      data:days,
+      backgroundColor:days.map(d=>d>100000?G:d<60000?R:T+'99'),
+      borderRadius:3
+    },{
+      type:'line',label:'7-day avg',
+      data:days.map((d,i,a)=>i<6?null:a.slice(i-6,i+1).reduce((s,x)=>s+x,0)/7),
+      borderColor:A,borderWidth:2,pointRadius:0,fill:false,tension:.4
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'₹'+c.raw.toLocaleString('en-IN')}}},
+    scales:{
+      y:{ticks:{callback:v=>'₹'+(v/1000).toFixed(0)+'K'},grid:{color:'rgba(0,0,0,.04)'}},
+      x:{ticks:{maxRotation:45,font:{size:8}},grid:{display:false}}
+    }
+  }
+});
+
+// Camp pie
+new Chart(document.getElementById('campPie'),{
+  type:'doughnut',
+  data:{
+    labels:['Product KW','Brand Products PT','SP Exact','Competitor PT','SBV 15sec','Brand SP','SB Manual','SBV B+P','Others'],
+    datasets:[{
+      data:[377390,119740,100547,98171,68717,63051,53998,44489,78071],
+      backgroundColor:['#1A3557','#00C9A7','#27AE60','#4A6FA5','#F5A623','#00A88A','#E8505B','#7A8A99','#D4DCE8'],
+      borderWidth:2,borderColor:'#fff'
+    }]
+  },
+  options:{responsive:true,plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:12}}}}
+});
+
+// ROAS bar
+const rd=[
+  {n:'Brand SP',j:16.8,ju:28.1},{n:'Hero Harvest',j:12.7,ju:0},
+  {n:'SBV 10sec',j:10.9,ju:20.6},{n:'SP Exact',j:8.2,ju:11.2},
+  {n:'SBV 15sec',j:8.1,ju:14.1},{n:'Product KW',j:7.8,ju:9.9},
+  {n:'Comp PT',j:7.0,ju:10.0},{n:'SBV B+P',j:6.4,ju:8.4},
+  {n:'Brand Prod',j:5.1,ju:35.0},{n:'SD Views',j:4.7,ju:3.4},
+  {n:'SD Purch',j:3.0,ju:6.1},{n:'SB Manual',j:2.9,ju:2.2}
+];
+new Chart(document.getElementById('roasBar'),{
+  type:'bar',
+  data:{
+    labels:rd.map(d=>d.n),
+    datasets:[
+      {label:'Jul 2026',data:rd.map(d=>d.j),backgroundColor:rd.map(d=>d.j>=10?G:d.j>=6?A:R),borderRadius:3},
+      {label:'Jun 2026',data:rd.map(d=>d.ju),backgroundColor:'rgba(0,0,0,.08)',borderRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,indexAxis:'y',
+    plugins:{legend:{labels:{font:{size:10}}}},
+    scales:{x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:9}}},y:{ticks:{font:{size:9}},grid:{display:false}}}
+  }
+});
+</script>
+</body>
+</html>
